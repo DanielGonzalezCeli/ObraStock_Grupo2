@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import ec.edu.puce.obrastock.ui.bodega.BodegaScreen
+import ec.edu.puce.obrastock.ui.registro.RegistroScreen
 
 /**
  * Grafo de navegación de ObraStock: un único NavHost con las tres pantallas.
@@ -28,7 +29,10 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
             )
         }
         composable<RegistroRoute> {
-            PantallaVacia(titulo = "Registro")
+            RegistroScreen(
+                onVolver = { navController.popBackStack() },
+                onGuardado = { navController.popBackStack() },
+            )
         }
         composable<DetalleRoute> { entrada ->
             val ruta = entrada.toRoute<DetalleRoute>()
