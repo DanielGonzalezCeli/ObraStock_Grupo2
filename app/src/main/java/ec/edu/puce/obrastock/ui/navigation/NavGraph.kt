@@ -12,16 +12,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import ec.edu.puce.obrastock.ui.bodega.BodegaScreen
 
 /**
  * Grafo de navegación de ObraStock: un único NavHost con las tres pantallas.
- * Por ahora cada destino muestra una pantalla vacía; se reemplazan en los siguientes commits.
+ * Las pantallas que aún no existen muestran un marcador temporal.
  */
 @Composable
 fun NavGraph(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = BodegaRoute) {
         composable<BodegaRoute> {
-            PantallaVacia(titulo = "Bodega")
+            BodegaScreen(
+                onAgregarMaterial = { navController.navigate(RegistroRoute) },
+                onVerDetalle = { id -> navController.navigate(DetalleRoute(materialId = id)) },
+            )
         }
         composable<RegistroRoute> {
             PantallaVacia(titulo = "Registro")
