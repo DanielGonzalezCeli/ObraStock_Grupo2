@@ -1,16 +1,17 @@
 package ec.edu.puce.obrastock.domain.model
 
-/** Material guardado en la bodega de una obra. Inmutable: los cambios se hacen con copy(). */
 data class Material(
-    val id: Int,
-    val codigo: String,
+    val id: Long,
+    val obraId: Long,
     val nombre: String,
+    val categoria: String,
     val unidad: String,
-    val stock: Double,
-    val stockMinimo: Double,
-    val obraId: Int,
-) {
-    /** Verdadero cuando el stock llegó al mínimo y hay que reponer. */
-    val stockBajo: Boolean
-        get() = stock <= stockMinimo
-}
+    val existencias: Double,
+    val existenciasMinimas: Double,
+    val costoUnitario: Double,
+    val descripcion: String? = null
+)
+
+// Se calcula al vuelo: no se guarda en la base de datos.
+val Material.existenciasBajas: Boolean
+    get() = existencias <= existenciasMinimas

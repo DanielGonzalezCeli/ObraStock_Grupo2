@@ -2,19 +2,14 @@ package ec.edu.puce.obrastock.ui.navigation
 
 import kotlinx.serialization.Serializable
 
-/*
- * Rutas tipadas de la app. Cada pantalla es un tipo @Serializable,
- * así el compilador revisa los destinos y los argumentos (no hay strings sueltos).
- */
+// Cada destino es una clase u objeto serializable: los argumentos viajan con su tipo
+// y el compilador avisa si una ruta está mal escrita.
 
-/** Pantalla principal: lista de materiales de la bodega. */
 @Serializable
-object BodegaRoute
+object Bodega
 
-/** Formulario para registrar un material nuevo. */
 @Serializable
-object RegistroRoute
+data class RegistroMaterial(val materialId: Long? = null)
 
-/** Detalle de un material; recibe su id como argumento tipado. */
 @Serializable
-data class DetalleRoute(val materialId: Int)
+data class DetalleMaterial(val materialId: Long)
